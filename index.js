@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const md5 = require("md5");
 const uid2 = require("uid2");
-const cors = require("cors");
+
 require("dotenv").config();
 
 const app = express();
