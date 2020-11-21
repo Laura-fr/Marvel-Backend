@@ -22,7 +22,7 @@ const privateKey = process.env.PRIVATE_KEY;
 // publicKey => 1234
 // hash => ffd275c5130566a2916217b101f26150
 
-// Route pour les comics
+// ROUTE COMICS
 
 app.get("/comics", async (req, res) => {
   try {
@@ -39,11 +39,21 @@ app.get("/comics", async (req, res) => {
   }
 });
 
+// ROUTE CHARACTERS
+
+app.get("/characters", async (req, res) => {
+  try {
+    const ts = uid2(8);
+    const hash = md5(ts + privateKey + publicKey);
+    const response = await axios.get(
+      `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+    );
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 app.listen(process.env.PORT, () => {
   console.log("server is started");
   //   console.log(`Server Started on port ${process.env.PORT}`);
 });
-
-// Route
-
-// Route //
