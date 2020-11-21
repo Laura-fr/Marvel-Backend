@@ -46,7 +46,7 @@ app.get("/characters", async (req, res) => {
     const ts = uid2(8);
     const hash = md5(ts + privateKey + publicKey);
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      `https://gateway.marvel.com:443/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
     );
   } catch (error) {
     res.status(400).json({ message: error.message });
