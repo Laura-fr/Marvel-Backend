@@ -6,7 +6,6 @@ const cors = require("cors");
 
 require("dotenv").config();
 
-app.use(cors());
 const app = express();
 
 const publicKey = process.env.PUBLIC_KEY;
@@ -25,6 +24,7 @@ const privateKey = process.env.PRIVATE_KEY;
 // hash => ffd275c5130566a2916217b101f26150
 
 // ROUTE COMICS
+app.use(cors());
 
 app.get("/comics", async (req, res) => {
   try {
