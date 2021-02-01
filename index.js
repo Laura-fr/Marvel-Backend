@@ -63,13 +63,14 @@ app.get("/characters", async (req, res) => {
 
 // ROUTE CHARACTERS ID
 
-app.get("/characters/:id", async (req, res) => {
+router.get("/character/:id", async (req, res) => {
+  let id = req.params.id;
   try {
     const ts = uid2(8);
     const hash = md5(ts + privateKey + publicKey);
-    const characterId = req.params.id;
+
     const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters/${characterId}?limit=100&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/characters/${id}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
     );
     res.json(response.data.data);
   } catch (error) {
@@ -81,3 +82,17 @@ app.listen(process.env.PORT, () => {
   console.log("server is started");
   //   console.log(`Server Started on port ${process.env.PORT}`);
 });
+
+// app.get("/characters/:id", async (req, res) => {
+//   try {
+//     const ts = uid2(8);
+//     const hash = md5(ts + privateKey + publicKey);
+//     const characterId = req.params.id;
+//     const response = await axios.get(
+//       `http://gateway.marvel.com/v1/public/characters/${characterId}?limit=100&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+//     );
+//     res.json(response.data.data);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// });
